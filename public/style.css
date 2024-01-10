@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@700&family=Open+Sans&family=Oswald&family=Roboto+Condensed&family=Roboto:wght@400;900&family=Source+Sans+3&display=swap');
+body{
+    font-family: 'Open Sans', sans-serif;
+    /* background-image: url('assets/greg-rosenke-6QnEf_b47eA-unsplash.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.center-div{
+    padding-top: 10%;
+
+}
+.btn.btn-success{
+    padding: .4em 2em;
+}
+form{
+    padding: 0 1em;
+}
+#login.title>span{
+    font-size: .8em;
+}

@@ -1,0 +1,29 @@
+<%- include('../layout/header') -%>
+<div class="text-center center-div mt-5" id="login">
+    <div class="container w-25 border py-5 mt-5">
+ <% if(typeof messages !== 'undefined') {
+    %>
+    <h4><%= messages %></h4>
+    <%
+ }
+ %>
+
+<h1>Log in</h1>
+<form action="/" method="post" >
+    <br></br>
+    <input type="email" name="email" placeholder="Email" required>
+    <br></br>
+    <input type="password" name="password" placeholder="password" required>
+    <br></br>
+    <button value="Login">Log in</button>
+    
+
+</form>
+<form action="/signup" >
+<button style="margin-top: 20px;" >create account</button>
+</form>
+</div>
+</div>
+
+
+<%- include('../layout/footer') -%>

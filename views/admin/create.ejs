@@ -1,0 +1,24 @@
+<%- include('../layout/header.ejs')  -%>
+<div class="text-center center-div mt-5" id="login">
+    <div class="container w-25 border py-5 mt-5">
+<h1>Create User</h1>
+<form action="" method="post" >
+    <br></br>
+    <input type="text" name="name" placeholder="Name" required>
+    <br></br>
+    <input type="email" name="email" placeholder="Email" required>
+    <br></br>
+    <input type="tel" name="mobile" placeholder="mobile" required>
+    <br></br>
+    <input type="password" name="password" placeholder="password" required>
+    <br></br>
+    <button value="New User">New User</button>
+
+</form>
+<% if ( typeof messages !== 'undefined'){%>
+    <p style="color: rgb(21, 190, 21);"><%= messages %></p>
+    
+    <%}%>
+    </div>
+    </div>
+<%- include('../layout/footer.ejs')  -%>

@@ -1,0 +1,22 @@
+<%- include('../layout/header.ejs')  -%>
+
+<div class="text-center center-div mt-5" id="login">
+    <div class="container w-25 border py-5 mt-5">
+<h1>Log in for admin</h1>
+<form action="" method="post" >
+    <br></br>
+    <input type="email" name="email" placeholder="Email" required>
+    <br></br>
+    <input type="password" name="password" placeholder="password" required>
+    <br></br>
+    <button value="Login">Log in</button>
+    
+
+</form><% if ( typeof messages !== 'undefined'){%>
+    <p style="color: red"><%= messages %></p>
+    
+    <%}%>
+    </div>
+    </div>
+
+<%- include('../layout/footer.ejs')  -%>

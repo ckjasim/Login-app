@@ -1,0 +1,55 @@
+<%- include('../layout/header') -%>
+<div class="text-center center-div mt-5" id="login">
+    
+       
+
+<h1>admin welcome</h1>
+
+
+
+<table border="1px" class="text-center center-div mt-5" style="margin-left: 30%;" width="35%">
+    
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>mobile</th>
+    </tr>
+
+<% 
+if(users.length >0){
+    for(let i=0;i<users.length;i++){
+        %>
+        <tr>
+            <td> <%= users[i].name %></td>
+            <td> <%= users[i].email %></td>
+            <td> <%= users[i].mobile %></td>
+            <td><a href="/admin/edit-user?id=<%=users[i]._id%>">Edit</a></td>
+
+            <td>
+                <form action="/admin/delete-user?id=<%=users[i]._id%>" method="post"><button>delete</button></form></td>
+            
+        </tr>
+        
+        
+    
+    
+        
+        <%
+    }
+}else{
+    %>
+    <tr>
+        <td colspan="5">users not found</td>
+        </tr>
+        <%
+    }
+    %>
+    </table>
+
+    <a href="/admin/create-user?id=<%=users._id%>">Create</a>
+<form action="/admin/adminlogout" method="post">
+    <button >logout</button>
+    </form>
+
+</div>
+<%- include('../layout/header') -%>
