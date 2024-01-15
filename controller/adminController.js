@@ -103,12 +103,18 @@ const editUserLoad= async (req,res)=>{
 const upadateUser= async (req,res)=>{
     try { 
        const user= req.query.id
-       
+       if(/^[A-Za-z.]+$/.test(req.body.name)) {
+        console.log("dgghgh");
       const userData= await User.findByIdAndUpdate({_id:user},{$set:{ name:req.body.name,email:req.body.email,mobile:req.body.mobile }},{new:true})
       if(userData){
           res.redirect('/admin/adminWelcome')
 
       }
+    }else{
+        console.log('give structre to name')
+        
+    }
+    
     } catch (error) {
         console.log(error.message);
         
@@ -121,7 +127,7 @@ const deleteUser = async (req,res)=>{
     
     
      await User.deleteOne({_id:user})
-     console.log('hello')
+     
      res.redirect('/admin/adminWelcome')
 
 
@@ -141,6 +147,8 @@ const createnewuser= async (req,res)=>{
 //create new user
 const createUser= async (req,res)=>{
     try {
+        if(/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)){ 
+        
         const checkemail= await User.findOne({email:req.body.email})
         if(checkemail){
 
@@ -167,7 +175,10 @@ const createUser= async (req,res)=>{
                 res.render('create', { messages: "Your login has failed." })
             }
         }
-        
+    }else{
+    
+        res.render('create', { messages: "Please check the structure of email" })
+    } 
     } catch (error) {
         console.log(error.message);
         

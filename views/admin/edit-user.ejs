@@ -16,6 +16,10 @@
     
 
 </form>
+<% if ( typeof messages !== 'undefined'){%>
+    <p style="color: rgb(21, 190, 21);"><%= messages %></p>
+    
+    <%}%>
 <form action="/admin">
     <button>Go Dashboard</button>
 </form>

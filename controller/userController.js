@@ -28,6 +28,13 @@ const loadSignUp = async (req, res) => {
 }
 const submit = async (req, res) => {
     try {
+        
+        
+        if(/^[A-Za-z.]+$/.test(req.body.name)) {
+        if(/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)){ 
+                           
+            
+
         const checkemail= await User.findOne({email:req.body.email})
         if(checkemail){
             res.render('signup',{messages:"Email is already exsit"})
@@ -52,6 +59,13 @@ const submit = async (req, res) => {
             res.render('signup', { messages: "Your login has failed." })
         }
     }
+    
+}else {
+        res.render('signup', { messages: "give correct structure in email" })
+    }
+}else{
+    res.render('signup', { messages: "the structure of name is not correct" })
+}
     } catch (error) {
         console.log(error.message);
 
