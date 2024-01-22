@@ -1,39 +1,63 @@
-<%- include('../layout/header')  -%>
+<%- include('../layout/header') -%>
 
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
 
+    .center-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
+    .dashboard-container {
+        width: 300px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-<div class="text-center center-div mt-5" id="login">
-    <div class="container w-25 border py-5 mt-5">
+    h3 {
+        text-align: center;
+        color: #007bff;
+    }
 
+    h5 {
+        margin-top: 10px;
+        color: #495057;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #dc3545;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<div class="center-div">
+    <div class="dashboard-container">
         <h3>Welcome to Express Dashboard</h3>
-        <h5><%= name%></h5>
-        <h5><%= email%></h5>
-        <h5><%= mobile%></h5>
+        <h5><%= name %></h5>
+        <h5><%= email %></h5>
+        <h5><%= mobile %></h5>
         <form action="/logout" method="post">
-            <button >logout</button>
-            </form>
+            <button type="submit">Logout</button>
+        </form>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%- include('../layout/footer.ejs')  -%>
+<%- include('../layout/footer.ejs') -%>

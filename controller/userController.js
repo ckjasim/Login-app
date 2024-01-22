@@ -2,7 +2,7 @@
 
 const User = require('../model/userdb')
 const bycrypt = require('bcrypt')
-
+const randomstring = require('randomstring')
 
 
 
@@ -125,7 +125,38 @@ const logout = (req,res)=>{
 
 }
 
+//Forget password
+const loadForget = async (req,res)=>{
+    try {
+        res.render('forget')
+    } catch (error) {
+        console.log(error)
+        
+    }
+}
 
+const forgetSubmit=async (req,res)=>{
+    try {
+        if(/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)){ 
+      console.log(req.body.email)
+      const email= req.body.email
+      const showUserData =await User.find({email:email})
+      if(showUserData.length >0){
+        console.log('email is exists')
+        const randomString = randomstring.generate()
+        const updateData = await User.updateOne({email:email},{$set:{token:randomString}})
+       
+      }else{
+        console.log('email is not exists')
+        res.render('forget',{messages:"email is not exists"})
+      }
+      
+        }
+    } catch (error) {
+        console.log(error)
+        
+    }
+}
 
 
 
@@ -137,6 +168,8 @@ module.exports = {
     loginUserVerify,
     loadHome,
     logout,
+    loadForget,
+    forgetSubmit
     
 
 

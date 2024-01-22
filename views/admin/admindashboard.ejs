@@ -1,117 +1,120 @@
 <%- include('../layout/header') -%>
-<div class="text-center center-div mt-5" id="login">
-    
-       
 
-    <style>
-        * {
-          box-sizing: border-box;
-        }
-        
-        #myInput {
-          background-image: url('/css/searchicon.png');
-          background-position: 10px 10px;
-          background-repeat: no-repeat;
-          width: 100%;
-          font-size: 16px;
-          padding: 12px 20px 12px 40px;
-          border: 1px solid #ddd;
-          margin-bottom: 12px;
-        }
-        
-        #myTable {
-          border-collapse: collapse;
-          width: 100%;
-          border: 1px solid #ddd;
-          font-size: 18px;
-        }
-        
-        #myTable th, #myTable td {
-          text-align: left;
-          padding: 12px;
-        }
-        
-        #myTable tr {
-          border-bottom: 1px solid #ddd;
-        }
-        
-        #myTable tr.header, #myTable tr:hover {
-          background-color: #f1f1f1;
-        }
-        </style>
-        
-        
-        
-          <h1>Admin welcome</h1>
-        
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-        
-        <table id="myTable">
-          <tr class="header">
-                <th>Name</th>
-                <th>Email</th>
-                <th>mobile</th>
-                <th>Edit</th>
-                <th>Delete</th>
-          </tr>
-          
-        <% 
-        if(users.length >0){
-            for(let i=0;i<users.length;i++){
-                %>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .center-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    #myInput {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    #myTable tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+    button {
+        background-color: #dc3545;
+        color: #ffffff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #c82333;
+    }
+
+    .create-user-link {
+        display: block;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="center-div">
+    <h1>Admin Welcome</h1>
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+    <table id="myTable">
+        <tr class="header">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+        <% if(users.length > 0) {
+            for(let i = 0; i < users.length; i++) { %>
                 <tr>
-                    <td> <%= users[i].name %></td>
-                    <td> <%= users[i].email %></td>
-                    <td> <%= users[i].mobile %></td>
+                    <td><%= users[i].name %></td>
+                    <td><%= users[i].email %></td>
+                    <td><%= users[i].mobile %></td>
                     <td><a href="/admin/edit-user?id=<%=users[i]._id%>">Edit</a></td>
-        
                     <td>
-                        <form action="/admin/delete-user?id=<%=users[i]._id%>" method="post"><button>delete</button></form></td>
-                    
+                        <form action="/admin/delete-user?id=<%=users[i]._id%>" method="post">
+                            <button>Delete</button>
+                        </form>
+                    </td>
                 </tr>
-                
-                
-            
-            
-                
-                <%
-            }
-        }else{
-            %>
+            <% }
+        } else { %>
             <tr>
-                <td colspan="5">users not found</td>
-                </tr>
-                <%
-            }
-            %>
-            </table>
-            <a href="/admin/create-user?id=<%=users._id%>">Create</a>
-        <form action="/admin/adminlogout" method="post">
-            <button >logout</button>
-            </form>
-        
-        
-        <%- include('../layout/header') -%>
-        
-        <script>
-        function myFunction() {
-          var input, filter, table, tr, td, i, txtValue;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("myTable");
-          tr = table.getElementsByTagName("tr");
-          for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-              txtValue = td.textContent || td.innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            }       
-          }
-        }
-        </script>
-        
-        <%- include('../layout/footer') -%>
+                <td colspan="5">Users not found</td>
+            </tr>
+        <% } %>
+    </table>
+
+    <a href="/admin/create-user" class="create-user-link">Create User</a>
+
+    <form action="/admin/adminlogout" method="post">
+        <button>Logout</button>
+    </form>
+</div>
+
+<%- include('../layout/footer') -%>

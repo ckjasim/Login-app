@@ -1,28 +1,97 @@
-<%- include('../layout/header.ejs')  -%>
-<div class="text-center center-div mt-5" id="login">
-    <div class="container w-25 border py-5 mt-5">
-<h1>Edit User</h1>
-<form action="" method="post" >
-    <br></br>
-    <input type="text" name="name" placeholder="Name" value="<%= user.name %>" required>
-    <br></br>
-    <input type="email" name="email" placeholder="Email" value="<%= user.email%>" required>
-    <br></br>
-    <input type="tel" name="mobile" placeholder="Mobile" value="<%= user.mobile%> " required>
-    <br></br>
-    <input type="hidden"  value="<%= user._id %> " name="id">
-    <br></br>
-    <button value="Login">Update user</button>
-    
+<%- include('../layout/header.ejs') -%>
 
-</form>
-<% if ( typeof messages !== 'undefined'){%>
-    <p style="color: rgb(21, 190, 21);"><%= messages %></p>
-    
-    <%}%>
-<form action="/admin">
-    <button>Go Dashboard</button>
-</form>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .center-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .edit-user-container {
+        width: 300px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    p {
+        color: #15be15;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .go-dashboard-button {
+        margin-top: 15px;
+        background-color: #28a745;
+    }
+
+    .go-dashboard-button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="center-div">
+    <div class="edit-user-container">
+        <h1>Edit User</h1>
+        <form action="" method="post">
+            <input type="text" name="name" placeholder="Name" value="<%= user.name %>" required>
+            <input type="email" name="email" placeholder="Email" value="<%= user.email %>" required>
+            <input type="tel" name="mobile" placeholder="Mobile" value="<%= user.mobile %>" required>
+            <input type="hidden" value="<%= user._id %>" name="id">
+            <button type="submit">Update User</button>
+        </form>
+
+        <% if (typeof messages !== 'undefined') { %>
+            <p><%= messages %></p>
+        <% } %>
+
+        <form action="/admin">
+            <button class="go-dashboard-button" type="submit">Go Dashboard</button>
+        </form>
     </div>
-    </div>
-<%- include('../layout/footer.ejs')  -%>
+</div>
+
+<%- include('../layout/footer.ejs') -%>

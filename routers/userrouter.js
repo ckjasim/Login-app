@@ -28,7 +28,9 @@ userRoute.post('/signup',userController.submit)
 
  
 
-
+//userForget password
+userRoute.get('/forget',authantification.islogout,userController.loadForget)
+userRoute.post('/forget',userController.forgetSubmit)
 
 // route.get('/login',usercontroller.login)
 // route.post('/login',usercontroller.insertdbclient)
