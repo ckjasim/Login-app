@@ -2,7 +2,7 @@
 
 const User = require('../model/userdb')
 const bycrypt = require('bcrypt')
-const randomstring = require('randomstring')
+
 
 
 
@@ -15,7 +15,7 @@ const scurePassword = async (password) => {
         console.log(error.message);
     }
 
-}
+} 
 
 
 const loadSignUp = async (req, res) => {
@@ -23,9 +23,10 @@ const loadSignUp = async (req, res) => {
         res.render('signup')
     } catch (error) {
         res.send(error.message)
-
+    
     }
 }
+
 const submit = async (req, res) => {
     try {
         
@@ -37,7 +38,7 @@ const submit = async (req, res) => {
 
         const checkemail= await User.findOne({email:req.body.email})
         if(checkemail){
-            res.render('signup',{messages:"Email is already exsit"})
+            res.render('signup',{messages:"Email is already exisit"})
         }else{
             const sPassword = await scurePassword(req.body.password)
             const user = new User({
@@ -67,6 +68,7 @@ const submit = async (req, res) => {
     res.render('signup', { messages: "the structure of name is not correct" })
 }
     } catch (error) {
+        
         console.log(error.message);
 
     }
@@ -80,24 +82,17 @@ const loginUserVerify = async(req,res)=>{
         const password =req.body.password
      const userData = await User.findOne({email:email})
      if(userData){
-       const passwordMatch = await bycrypt.compare(password,userData.password)
+       const passwordMatch = await bycrypt.compare(password,userData.password) //true or false
        if(passwordMatch){
-        
- 
-        if(userData.is_varified === 0){
-
-            res.render('login',{message:'Please Verify your mail!'})
-        }else{
             req.session.user_id =userData._id;
             res.redirect('/home')
-        }
-       }else{
-        res.render('login',{messages:"Email and password is incorrect!"})
+        }else{
+        res.render('login',{messages:" Password is incorrect!"})
 
        }
 
      }else{
-        res.render('login',{messages:"Eamil is not existing"})
+        res.render('login',{messages:"Email is not existing"})
      }
 
         
@@ -125,38 +120,7 @@ const logout = (req,res)=>{
 
 }
 
-//Forget password
-const loadForget = async (req,res)=>{
-    try {
-        res.render('forget')
-    } catch (error) {
-        console.log(error)
-        
-    }
-}
 
-const forgetSubmit=async (req,res)=>{
-    try {
-        if(/[A-Za-z0-9._%+-]+@gmail.com/.test(req.body.email)){ 
-      console.log(req.body.email)
-      const email= req.body.email
-      const showUserData =await User.find({email:email})
-      if(showUserData.length >0){
-        console.log('email is exists')
-        const randomString = randomstring.generate()
-        const updateData = await User.updateOne({email:email},{$set:{token:randomString}})
-       
-      }else{
-        console.log('email is not exists')
-        res.render('forget',{messages:"email is not exists"})
-      }
-      
-        }
-    } catch (error) {
-        console.log(error)
-        
-    }
-}
 
 
 
@@ -168,8 +132,7 @@ module.exports = {
     loginUserVerify,
     loadHome,
     logout,
-    loadForget,
-    forgetSubmit
+
     
 
 

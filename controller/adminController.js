@@ -104,7 +104,7 @@ const upadateUser= async (req,res)=>{
     try { 
        const user= req.query.id
        if(/^[A-Za-z.]+$/.test(req.body.name)) {
-        console.log("dgghgh");
+        
       const userData= await User.findByIdAndUpdate({_id:user},{$set:{ name:req.body.name,email:req.body.email,mobile:req.body.mobile }},{new:true})
       if(userData){
           res.redirect('/admin/adminWelcome')
